@@ -61,7 +61,6 @@ def is_unicode(text):
 class SimpleDialogueManager(object):
     """
     This is the simplest dialogue manager to test the telegram bot.
-    Your task is to create a more advanced one in dialogue_manager.py."
     """
 
     def generate_answer(self, question):
@@ -76,23 +75,13 @@ def main():
         if not "TELEGRAM_TOKEN" in os.environ:
             print("Please, set bot token through --token or TELEGRAM_TOKEN env variable")
             return
-        token = os.environ["TELEGRAM_TOKEN"]
-
-    #################################################################
-
-    # Your task is to complete dialogue_manager.py and use your
-    # advanced DialogueManager instead of SimpleDialogueManager.
-
-    # This is the point where you plug it into the Telegram bot.
-    # Do not forget to import all needed dependencies when you do so.
+        token = os.environ["TELEGRAM_TOKEN"].
 
     # simple_manager = SimpleDialogueManager()
     # bot = BotHandler(token, simple_manager)
     dialogue_manager = DialogueManager(RESOURCE_PATH)
     dialogue_manager.create_chitchat_bot()
     bot = BotHandler(token, dialogue_manager)
-
-    ###############################################################
 
     print("Ready to talk!")
     offset = 0

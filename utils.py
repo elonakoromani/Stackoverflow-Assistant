@@ -30,6 +30,7 @@ def text_prepare(text):
 
     return text.strip()
 
+
 def load_embeddings(embeddings_path):
     embeddings = {}
     with open(embeddings_path, newline='') as embedding_file:
@@ -41,6 +42,7 @@ def load_embeddings(embeddings_path):
         dim = len(line) - 1
     return embeddings, dim
 
+
 def question_to_vec(question, embeddings, dim):
     vec = np.zeros((dim,), dtype=np.float32)
     count = 0
@@ -50,7 +52,8 @@ def question_to_vec(question, embeddings, dim):
             vec += embeddings[w]
     if count == 0:
         return vec
-    return vec/count
+    return vec / count
+
 
 def unpickle_file(filename):
     """Returns the result of unpickling the file content."""

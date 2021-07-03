@@ -49,11 +49,6 @@ class DialogueManager(object):
     def create_chitchat_bot(self):
         """Initializes self.chitchat_bot with some conversational model."""
 
-        # Hint: you might want to create and train chatterbot.ChatBot here.
-        # It could be done by creating ChatBot with the *trainer* parameter equals
-        # "chatterbot.trainers.ChatterBotCorpusTrainer"
-        # and then calling *train* function with "chatterbot.corpus.english" param
-
         chatbot = ChatBot('Buddy-Assistant')
 
         # Create a new trainer for the chatbot
@@ -66,25 +61,17 @@ class DialogueManager(object):
     def generate_answer(self, question):
         """Combines stackoverflow and chitchat parts using intent recognition."""
 
-        # Recognize intent of the question using `intent_recognizer`.
-        # Don't forget to prepare question and calculate features for the question.
-
         prepared_question = text_prepare(question)
         features = self.tfidf_vectorizer.transform([prepared_question])
         intent = self.intent_recognizer.predict(features)[0]
 
-        # Chit-chat part:
         if intent == 'dialogue':
-            # Pass question to chitchat_bot to generate a response.
             response = self.chatbot.get_response(question)
             return response
 
-        # Goal-oriented part:
         else:
-            # Pass features to tag_classifier to get predictions.
             tag = self.tag_classifier.predict(features)[0]
 
-            # Pass prepared_question to thread_ranker to get predictions.
             thread_id = self.thread_ranker.get_best_thread(prepared_question, tag)
 
             return self.ANSWER_TEMPLATE % (tag, thread_id)

@@ -1,3 +1,3 @@
 # Stackoverflow-Assistant
 
-Coursera: Natural Language Processing Course
+Coursera: Natural Language Processing
